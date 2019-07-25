@@ -1,0 +1,24 @@
+# git
+.git/
+.githooks/
+
+# Build / Compilation
+*.pyc
+build/
+dist/
+__pycache__/
+*.egg-info/
+
+# runtime / configuration
+*.bak
+*.log
+temp/
+
+# IDE
+.idea/
+*.iml
+
+# tests
+./tests/
+.coverage
+.pytest_cache/
