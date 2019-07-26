@@ -1,9 +1,9 @@
 from flaskr.db import db
 
 
-class TagModel(db.Model):
+class CategoryModel(db.Model):
 
-    __tablename__ = 'tags'
+    __tablename__ = 'categories'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 

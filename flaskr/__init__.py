@@ -44,13 +44,13 @@ def create_app(test_config=None):
     from flask_restful import Api
     api = Api(app)
 
-    from flaskr.resources.gif import GifModel, GifList
-    # api.add_resource(GifModel, "/gif/<string:id>")
+    from flaskr.resources.gif import Gif, GifList
+    api.add_resource(Gif, "/gif/<string:id>")
     api.add_resource(GifList, "/gifs")
 
-    from flaskr.resources.tag import TagModel, TagList
-    # api.add_resource(TagModel, "/tag/<string:id>")
-    api.add_resource(TagList, "/tags")
+    from flaskr.resources.category import Category, CategoryList
+    api.add_resource(Category, "/category/<string:id>")
+    api.add_resource(CategoryList, "/categories")
 
     from flaskr.resources.user import UserRegister
     api.add_resource(UserRegister, "/register")

@@ -7,7 +7,7 @@ class GifModel(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     # TODO decide on proper length for giphy alpha-numeric ids
     giphy_id = db.Column(db.String(80))
-    tags = db.relationship('TagModel', lazy='dynamic')
+    tags = db.relationship('CategoryModel', lazy='dynamic')
 
     def __init__(self, name):
         self.name = name
