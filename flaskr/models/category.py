@@ -3,16 +3,12 @@ from flaskr.db import db
 
 class CategoryModel(db.Model):
 
-    __tablename__ = 'categories'
+    __tablename__ = 'category'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
 
-    gif_id = db.Column(db.Integer, db.ForeignKey('gifs.id'))
-    gif = db.relationship('GifModel')
-
-    def __init__(self, name, gif_id):
+    def __init__(self, name):
         self.name = name
-        self.gif_id = gif_id
 
     def json(self):
         return {"id": self.id, "name": self.name}

@@ -1,26 +1,25 @@
 from flaskr.db import db
 
 
-class GifModel(db.Model):
+class ImageModel(db.Model):
 
-    __tablename__ = 'gifs'
+    __tablename__ = 'image'
     id = db.Column(db.Integer, primary_key=True)
     # TODO decide on proper length for giphy alpha-numeric ids
-    giphy_id = db.Column(db.String(80))
-    tags = db.relationship('CategoryModel', lazy='dynamic')
+    external_id = db.Column(db.String(80))
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self, external_id):
+        self.external_id = external_id
 
     def json(self):
         return {
-            "giphy_id": self.giphy_id,
-            "tags": [tag.json() for tag in self.tag.all()]
+            "id": self.id,
+            "external_id": self.external_id,
         }
 
     @classmethod
-    def find_by_giphy_id(cls, giphy_id):
-        return cls.query.filter_by(name=giphy_id).first()
+    def find_by_external_id(cls, external_id):
+        return cls.query.filter_by(external_id=external_id).first()
 
     def save_to_db(self):
         """ replaces insert and update"""

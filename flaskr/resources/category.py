@@ -24,8 +24,8 @@ class Category(Resource):
                        "message": f"A category with name '{name}' already exists."
                    }, 400
 
-        data = Category.parser.parse_args()
-        category = CategoryModel(name, **data)
+        # data = Category.parser.parse_args()
+        category = CategoryModel(name)
 
         try:
             category.save_to_db()
@@ -50,7 +50,7 @@ class Category(Resource):
             return {'message': 'an error occurred'}, 500
 
         if category is None:
-            category = CategoryModel(name, **data)
+            category = CategoryModel(name)
         else:
             category.price = data['price']
 

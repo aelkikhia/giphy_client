@@ -29,12 +29,12 @@ def create_app(test_config=None):
     except OSError:
         pass
 
+    # TODO configure cors for security in production
+    CORS(app, resources={r"/*": {"origins": "*"}})
+
     # init db
     from flaskr.db import db
     db.init_app(app)
-
-    # TODO configure cors for security in production
-    CORS(app, resources={r"/*": {"origins": "*"}})
 
     @app.before_first_request
     def create_tables():
@@ -44,15 +44,21 @@ def create_app(test_config=None):
     from flask_restful import Api
     api = Api(app)
 
-    from flaskr.resources.gif import Gif, GifList
-    api.add_resource(Gif, "/gif/<string:id>")
-    api.add_resource(GifList, "/gifs")
+    from flaskr.resources.image import Image, ImageList
+    api.add_resource(Image, "/image/<string:external_id>")
+    api.add_resource(ImageList, "/images")
 
     from flaskr.resources.category import Category, CategoryList
-    api.add_resource(Category, "/category/<string:id>")
+    api.add_resource(Category, "/category/<string:name>")
     api.add_resource(CategoryList, "/categories")
 
-    from flaskr.resources.user import UserRegister
-    api.add_resource(UserRegister, "/register")
+    from flaskr.resources.user import User
+    api.add_resource(User, "/user")
+
+    from flaskr.resources.user_image import UserImage
+    api.add_resource(UserImage, "/user/image")
+
+    from flaskr.resources.giphy import GiphySearch
+    api.add_resource(GiphySearch, "/search/<string:input>")
 
     return app
