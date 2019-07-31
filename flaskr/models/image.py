@@ -12,10 +12,7 @@ class ImageModel(db.Model):
         self.external_id = external_id
 
     def json(self):
-        return {
-            "id": self.id,
-            "external_id": self.external_id,
-        }
+        return {"id": self.id, "external_id": self.external_id}
 
     @classmethod
     def find_by_external_id(cls, external_id):

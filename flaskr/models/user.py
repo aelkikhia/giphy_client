@@ -16,12 +16,21 @@ class UserModel(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     external_id = db.Column(db.String(80))
+
+    # liked images relationship
     likes = db.relationship('ImageModel',
                             secondary=user_image,
                             backref=db.backref('likes', lazy='dynamic'))
 
+    # image category relationship
+    # categories = db.relationship('CategoryModel', backref='owner')
+
     def __init__(self, external_id):
         self.external_id = external_id
+
+    def __str__(self):
+        """ readable representation of the user model"""
+        return self.external_id
 
     @classmethod
     def find_by_external_id(cls, external_id):

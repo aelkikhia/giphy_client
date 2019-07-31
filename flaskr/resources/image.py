@@ -6,10 +6,10 @@ from flaskr.models.image import ImageModel
 class Image(Resource):
 
     parser = reqparse.RequestParser()
-    parser.add_argument("external_id",
+    parser.add_argument('external_id',
                         type=str,
                         required=True,
-                        help="This field cannot be left blank.")
+                        help='This field cannot be left blank.')
 
     # @jwt_required()
     def get(self, external_id):
@@ -22,10 +22,11 @@ class Image(Resource):
             return image.json(), 200
         return {'message': 'Image not found'}, 404
 
+    # @jwt_required()
     def post(self, external_id):
         if ImageModel.find_by_external_id(external_id):
             return {
-                       "message": f"A image with id '{external_id}' already exists."
+                       'message': f"A image with id '{external_id}' already exists."
                    }, 400
 
         image = ImageModel(external_id)
@@ -37,6 +38,7 @@ class Image(Resource):
 
         return image.json(), 201
 
+    # @jwt_required()
     def delete(self, external_id):
         image = ImageModel.find_by_external_id(external_id)
 
@@ -47,6 +49,6 @@ class Image(Resource):
 
 
 class ImageList(Resource):
+    # @jwt_required()
     def get(self):
         return {'images': [image.json() for image in ImageModel.query.all()]}
-

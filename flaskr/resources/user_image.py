@@ -11,11 +11,16 @@ class UserImage(Resource):
                         help="This field cannot be left blank.")
     parser.add_argument("external_image_id",
                         type=str,
-                        required=True,
+                        required=False,
                         help="This field cannot be left blank.")
 
     def post(self):
-        """ add """
+        """user (un)likes an image
+        find user and image. if image does not exist add it. create or
+        remove relationship
+        TODO: do not remove relationship, just deactivate and update time
+        :return: response message and code
+        """
         data = UserImage.parser.parse_args()
 
         user = UserModel.find_by_external_id(data['external_user_id'])
@@ -31,18 +36,37 @@ class UserImage(Resource):
                 image.save_to_db()
             except:
                 return {'message': 'an error occurred saving the image'}, 500
+            # TODO: add user/image association to bypass the below sql call
 
         query_user_image = UserModel.query.join(user_image).join(ImageModel).filter(
-            (user_image.c.user_id == user.id) & (user_image.c.image_id == image.id)).all()
+            (user_image.c.user_id == user.id) &
+            (user_image.c.image_id == image.id)).all()
 
-        print(query_user_image)
-
-        if not query_user_image:
+        # TODO: break into smaller functions for reusability
+        if query_user_image:
+            user.likes.remove(image)
+            user.save_to_db()
+            return {'message': 'Image unliked successfully.'}, 201
+        else:
             user.likes.append(image)
             user.save_to_db()
             return {'message': 'Image liked successfully.'}, 201
 
-        return {'message': 'Image already liked by user'}, 400
+    def get(self):
+        """ get a list of all users liked image ids"""
+        data = UserImage.parser.parse_args()
+
+        user = UserModel.find_by_external_id(data['external_user_id'])
+
+        if not user:
+            return {'message': 'No user with that ID exists'}, 404
+
+        return {'likes': user.likes}
+
+
+
+
+
 
 
 

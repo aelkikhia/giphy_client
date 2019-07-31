@@ -1,0 +1,150 @@
+{
+	"info": {
+		"_postman_id": "ad7fca8f-60a9-4be4-b9ef-8e2078e883f4",
+		"name": "giphy_client",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/image/<id>",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"user_id\": \"test_user_id\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/image/image_id2",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"image",
+						"image_id2"
+					]
+				},
+				"description": "This should return an item uniquely identified by its name"
+			},
+			"response": []
+		},
+		{
+			"name": "/categories",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/categories",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"categories"
+					]
+				},
+				"description": "get categories from rest endpoint"
+			},
+			"response": []
+		},
+		{
+			"name": "/user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"external_id\": \"user1\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user"
+					]
+				},
+				"description": "add user"
+			},
+			"response": []
+		},
+		{
+			"name": "/user_image",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"external_user_id\": \"user1\",\n\t\"external_image_id\": \"jfsaMQr3GNkKk\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/user/image",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"user",
+						"image"
+					]
+				},
+				"description": "associate user to image"
+			},
+			"response": []
+		},
+		{
+			"name": "search",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"search_input\": \"apple\",\n\t\"external_user_id\": \"user1\"\n}"
+				},
+				"url": {
+					"raw": "{{url}}/search",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"search"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

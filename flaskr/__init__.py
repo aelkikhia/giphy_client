@@ -48,9 +48,9 @@ def create_app(test_config=None):
     api.add_resource(Image, "/image/<string:external_id>")
     api.add_resource(ImageList, "/images")
 
-    from flaskr.resources.category import Category, CategoryList
-    api.add_resource(Category, "/category/<string:name>")
-    api.add_resource(CategoryList, "/categories")
+    # from flaskr.resources.category import Category, CategoryList
+    # api.add_resource(Category, "/category/<string:name>")
+    # api.add_resource(CategoryList, "/categories")
 
     from flaskr.resources.user import User
     api.add_resource(User, "/user")
@@ -59,6 +59,6 @@ def create_app(test_config=None):
     api.add_resource(UserImage, "/user/image")
 
     from flaskr.resources.giphy import GiphySearch
-    api.add_resource(GiphySearch, "/search/<string:input>")
+    api.add_resource(GiphySearch, "/search")
 
     return app

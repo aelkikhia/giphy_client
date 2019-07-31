@@ -10,6 +10,7 @@ class User(Resource):
                         required=True,
                         help="This field cannot be left blank.")
 
+    # TODO: hook up google auth/jwt
     def post(self):
         """ Create a new user"""
         data = User.parser.parse_args()
