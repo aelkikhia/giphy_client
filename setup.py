@@ -4,9 +4,9 @@ from setuptools import setup, find_packages
 __author__ = 'aelkikhia'
 
 setup(
-    name='pyduel_engine',
+    name='giphy_client',
     version='0.1',
-    description='Duels engine written in python',
+    description='POC giphy client',
     author='Taz El-Kikhia',
     author_email='aelkikhia@gmail.com',
     tests_require=[

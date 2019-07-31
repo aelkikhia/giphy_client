@@ -12,7 +12,7 @@ exclude =
     dist/,
 
 include =
-    pyduel_engine
+    flaskr
 
 ignore=
     F403,

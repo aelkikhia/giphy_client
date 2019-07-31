@@ -10,7 +10,6 @@ instance/
 *.iml
 *.xml
 *.log
-pyduel_engine.egg-info/
 *.DS_Store*
 cache-store
 cache-config
